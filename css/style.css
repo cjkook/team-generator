@@ -1,0 +1,122 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+#index-banner {
+  height: 200px;
+  min-height: 200px;
+}
+nav ul a,
+nav .brand-logo {
+  color: #011627;
+}
+
+nav.dark {
+  background-color: #011627;
+}
+
+.cards-container {
+  column-break-inside: avoid;
+}
+.cards-container .card {
+  display: inline-block;
+  overflow: visible;
+}
+
+.card .card-content ,.card-title{
+  padding: 24px;
+  border-radius: 0 0 2px 2px;
+  background-color: azure;
+  color: #011627;
+}
+
+@media only screen and (max-width: 600px) {
+  .cards-container {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+  }
+}
+@media only screen and (min-width: 601px) {
+  .cards-container {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+  }
+}
+@media only screen and (min-width: 993px) {
+  .cards-container {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+  }
+}
+.text-center {
+  text-align: center;
+}
+
+.new-teal-text {
+  color: #2ec4b6;
+}
+
+.new-red-lighten-1 {
+  background-color: #e71d36;
+  color: #fdfffc;
+}
+
+p {
+  line-height: 2rem;
+  color: #011627;
+}
+
+.sidenav-trigger {
+  color: #26a69a;
+}
+
+.parallax-container {
+  min-height: 380px;
+  line-height: 0;
+  height: auto;
+  color: #011627;
+}
+.parallax-container .section {
+  width: 100%;
+}
+
+@media only screen and (max-width: 992px) {
+  .parallax-container .section {
+    position: absolute;
+    top: 40%;
+  }
+  #index-banner .section {
+    top: 10%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #index-banner .section {
+    top: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  #compare {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  #search-again {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+}
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+  font-size: inherit;
+}
+
