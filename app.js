@@ -10,9 +10,111 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+let batchEmployees = [];
 
 // Write code to use inquirer to gather information about the development team members,
+// ! inquirer for each employee
 // and to create objects for each team member (using the correct classes as blueprints!)
+fnNew();
+// CREATE NEW ENTRY
+function fnNew() {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        message: "Name:",
+        name: "name",
+      },
+      {
+        type: "input",
+        message: "ID:",
+        name: "id",
+      },
+      {
+        type: "input",
+        message: "Email:",
+        name: "email",
+      },
+      {
+        type: "list",
+        message: "Which type of employee would is this?",
+        name: "role",
+        choices: ["Intern", "Manager", "Engineer", "Employee"],
+      },
+    ])
+    .then(function (res) {
+      const { name, id, email, role } = res;
+      let entry = res;
+      console.log(name);
+      switch (role) {
+        case "Intern":
+          inquirer
+            .prompt({
+              type: "input",
+              message: "Which school does this employee attend?",
+              name: "school",
+            })
+            .then((res2) => {
+              entry = new Intern(name, id, email, res2.school);
+              batchEmployees.push(entry);
+              console.log(batchEmployees);
+              fnAddAnother();
+            });
+          break;
+        case "Manager":
+          inquirer
+            .prompt({
+              type: "input",
+              message: "Office Number:",
+              name: "officeNumber",
+            })
+            .then((res2) => {
+              entry = new Manager(name, id, email, res2.officeNumber);
+              batchEmployees.push(entry);
+            });
+          break;
+        case "Engineer":
+          inquirer
+            .prompt({
+              type: "input",
+              message: "Github user name:",
+              name: "github",
+            })
+            .then((res2) => {
+              entry = new Engineer(name, id, email, res2.github);
+              batchEmployees.push(entry);
+            });
+          break;
+        default:
+          entry = new Employee(name, id, email);
+          batchEmployees.push(entry);
+          break;
+      }
+    });
+}
+
+function fnAddAnother() {
+  inquirer
+    .prompt({
+      type: "list",
+      message: "Would you like to enter another employee?",
+      name: "addAnother",
+      choices: ["Yes", "No"],
+    })
+    .then((res) => {
+      if (res.addAnother === "Yes") {
+        fnNew();
+      } else {
+        fs.writeFile(outputPath, render(batchEmployees), function (err) {
+          if (err) {
+            return console.log(err);
+          }
+
+          console.log("Success!");
+        });
+      }
+    });
+}
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
